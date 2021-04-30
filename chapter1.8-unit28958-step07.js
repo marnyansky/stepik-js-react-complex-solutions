@@ -5,10 +5,14 @@
 const averageRating = apiResult => {
     let allRatings = 0;
     let count = 0;
-    const sumRatings = apiResult.results.filter(x => {
-        allRatings += (parseFloat(x.rating.valueOf()));
-        count++;
-    });
+    for (let result of apiResult.results) {
+        try {
+            allRatings += (parseFloat(result.rating.valueOf()));
+            count++;
+        } catch (e) {
+            console.log(e.message);
+        }
+    }
     return allRatings / count;
 }
 
